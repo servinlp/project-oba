@@ -17,7 +17,12 @@ class GallaryContainer {
 
 		this.data = []
 
-		this.allObjects.translateX( -( ( config.gallary.tile.width + ( config.gallary.tile.margin * ( config.gallary.tile.width - 1 ) ) ) / 2 ) )
+		const width = config.gallary.tile.width,
+			margin = config.gallary.tile.margin,
+			number =  config.gallary.tile.number
+
+		//							For first element - For entire width 		- For margin
+		this.allObjects.translateX( ( width / 2 ) - ( ( number / 2 ) * width ) - ( ( number - 1 ) * margin / 2 ) )
 		scene.add( this.allObjects )
 
 	}
@@ -39,15 +44,16 @@ class GallaryContainer {
 			const item = new GallaryItem( dat, startIndex + i )
 			this.all.push( item )
 			this.allObjects.add( item.mesh )
-			this.waitingList.push( item )
+			//this.waitingList.push( item )
+			//item.startProssesing()
 
 		} )
 
-		this.checkForAvailableWorkers()
+		//this.checkForAvailableWorkers()
 
 	}
 
-	checkForAvailableWorkers() {
+	/*checkForAvailableWorkers() {
 
 		if ( this.processing.length === this.totalWorkers || this.waitingList.length === 0 ) return
 
@@ -58,24 +64,23 @@ class GallaryContainer {
 			const item = this.waitingList.splice( 0, 1 )[ 0 ]
 
 			this.processing.push( item )
-			item.mesh.addEventListener( 'done', this.itemIsDone.bind( this ) )
+			item.mesh.addEventListener( 'done', this.itemIsDone )
 			item.startProssesing()
 
 		}
 
-	}
+	}*/
 
 	itemIsDone( e ) {
 
-		console.log( e )
-		console.log( e.target )
-		console.log( this.processing )
+		console.log( 'event',  e )
+		// console.log( 'this.processing', this.processing )
 
-		const index = this.processing.indexOf( e.target )
-		this.processing.splice( index, 1 )
-		this.done.push( e.target )
+		// const index = this.processing.indexOf( e.target )
+		// this.processing.splice( index, 1 )
+		// this.done.push( e.target )
 
-		console.log( this.processing )
+		// console.log( 'this.processing', this.processing )
 
 	}
 

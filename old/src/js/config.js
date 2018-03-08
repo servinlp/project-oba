@@ -1,7 +1,8 @@
 export default {
 	gallary: {
 		tile: {
-			width: 3,
+			number: 3,
+			width: 1,
 			margin: 0.2
 		}
 	}

@@ -1,8 +1,6 @@
-body {
-	margin: 0;
-}
+@import 'components/variables';
+@import 'components/base';
 
-canvas {
-	display: block;
-	margin: 0;
-}
+@import 'components/header';
+@import 'components/overview';
+@import 'components/details';

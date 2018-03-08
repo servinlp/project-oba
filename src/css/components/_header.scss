@@ -1,0 +1,28 @@
+header {
+	padding: 1em;
+	font-size: 2em;
+	max-width: $container-width;
+	margin: 0 auto;
+
+	p {
+		display: inline-block;
+		font-size: 2rem;
+		margin-top: 1em;
+	}
+
+	a {
+		position: relative;
+		color: $white;
+		//text-decoration: none;
+		text-decoration-skip: edges;
+		margin-right: 1.5em;
+
+		&::before {
+			content: '>';
+			position: absolute;
+			bottom: 0;
+			right: -1em;
+			color: $white;
+		}
+	}
+}

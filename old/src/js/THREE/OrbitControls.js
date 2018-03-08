@@ -12,7 +12,7 @@
 //    Orbit - left mouse / touch: one finger move
 //    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
 //    Pan - right mouse, or arrow keys / touch: three finger swipe
-import * as THREE from './three.module'
+import * as THREE from './three.module.js'
 
 THREE.OrbitControls = function ( object, domElement ) {
 
@@ -160,7 +160,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 			spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
 
 			spherical.makeSafe();
-
 
 			spherical.radius *= scale;
 

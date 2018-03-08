@@ -1,0 +1,19 @@
+.details {
+	max-width: 60rem;
+
+	picture {
+		display: block;
+
+		img {
+			display: block;
+			margin: 0 auto;
+			width: 100%;
+			max-width: 40em;
+			height: auto;
+		}
+	}
+
+	h2 {
+		text-align: center;
+	}
+}
