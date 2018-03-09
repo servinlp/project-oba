@@ -22,7 +22,6 @@ function getCategories( cb ) {
 			.then( res => res.json() )
 			.then( res => {
 
-				console.log( res )
 				const data = res.results.bindings.map( el => ( {
 					count: el.count.value,
 					type: el.type.value
@@ -54,11 +53,15 @@ function singleCategorieData( categorie ) {
 	                const sparqlquery = `
 					PREFIX dc: <http://purl.org/dc/elements/1.1/>
 					PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-					SELECT ?cho ?title ?img ?subjects WHERE {
+					PREFIX dct: <http://purl.org/dc/terms/>
+					SELECT ?cho ?title ?img ?subjects ?spatial ?description ?date WHERE {
 						?cho dc:type "${ categorie }"^^xsd:string .
-						?cho dc:subject ?subjects .
 						?cho dc:title ?title .
 						?cho foaf:depiction ?img .
+						OPTIONAL { ?cho dc:subject ?subjects } .
+						OPTIONAL { ?cho dct:spatial ?spatial } .
+						OPTIONAL { ?cho dc:description ?description } .
+						OPTIONAL { ?cho dc:date ?date } .
 					}
 					LIMIT 1000`,
 				encodedquery = encodeURIComponent( sparqlquery ),
@@ -70,15 +73,40 @@ function singleCategorieData( categorie ) {
 
 				const data = unique( res.results.bindings.map( el => {
 
-					return {
+					const obj = {
 						cho: el.cho.value,
 						title: el.title.value,
 						img: el.img.value,
-						subjects: el.subjects.value,
 						slug: '/c/' + categorie.toLowerCase().replace( / /g, '-' ) + '/single/' + el.title.value.toLowerCase().replace( / /g, '-' ),
 						titleSlug: el.title.value.toLowerCase().replace( / /g, '-' ),
 						categorie: categorie[ 0 ].toUpperCase() + categorie.substr( 1, categorie.length )
 					}
+
+					if ( el.description ) {
+
+						obj.description = el.description.value
+
+					}
+
+					if ( el.subjects ) {
+
+						obj.subjects = el.subjects.value
+
+					}
+
+					if ( el.spatial ) {
+
+						obj.spatial = el.spatial.value
+
+					}
+
+					if ( el.date ) {
+
+						obj.date = el.date.value
+
+					}
+
+					return obj
 
 				} ) )
 

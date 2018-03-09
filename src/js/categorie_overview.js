@@ -15,12 +15,14 @@ class CategorieOverview {
 
 		return `
 			<header>
-				<h1>Catalogus van de amsterdamse geschiedenis</h1>
-				<p>Categorie overview</p>
+				<h1>Catalogus van de Amsterdamse geschiedenis</h1>
+				<p class="subtitle">Browse door de geschiedenis van Amsterdam</p>
+				<p>Categorie overzicht</p>
 			</header>
 			<main>
 				<ul class="overview"></ul>
 			</main>
+			<div class="empty"></div>
 			`
 
 	}
@@ -40,7 +42,6 @@ class CategorieOverview {
 		let counter = 0,
 			i = 0
 
-		//for ( let i = startIndex; i < 20; i++ ) {
 		while( counter < 20 ) {
 
 			const el = this.data[ i ]

@@ -27,9 +27,12 @@ class CategorieItem {
 			subTitle = document.createElement( 'p' ),
 
 			main = document.createElement( 'main' ),
-			ul = document.createElement( 'ul' )
+			ul = document.createElement( 'ul' ),
+			empty = document.createElement( 'div' )
 
-		title.textContent = 'Catalogus van de amsterdamse geschiedenis'
+		empty.classList.add( 'empty' )
+
+		title.textContent = 'Catalogus van de Amsterdamse geschiedenis'
 
 		breadcrumb.textContent = 'Categorie overview'
 		breadcrumb.setAttribute( 'href', '/' )
@@ -47,6 +50,7 @@ class CategorieItem {
 
 		this.element.appendChild( header )
 		this.element.appendChild( main )
+		this.element.appendChild( empty )
 
 		let counter = 0
 
@@ -127,9 +131,10 @@ class CategorieItem {
 			main = document.createElement( 'main' ),
 			picture = document.createElement( 'picture' ),
 			img = document.createElement( 'img' ),
-			pictureTitle = document.createElement( 'h2' )
+			pictureTitle = document.createElement( 'h2' ),
+			textBlock = document.createElement( 'div' )
 
-		title.textContent = 'Catalogus van de amsterdamse geschiedenis'
+		title.textContent = 'Catalogus van de Amsterdamse geschiedenis'
 
 		breadcrumb.textContent = 'Categorie overview'
 		breadcrumb.setAttribute( 'href', '/' )
@@ -156,10 +161,62 @@ class CategorieItem {
 		picture.appendChild( img )
 
 		main.appendChild( picture )
-		main.appendChild( pictureTitle )
+		textBlock.appendChild( pictureTitle )
+
+		main.appendChild( textBlock )
 
 		this.element.appendChild( header )
 		this.element.appendChild( main )
+
+		if ( this.data.description ) {
+
+			const description = document.createElement( 'p' )
+			description.classList.add( 'description' )
+			description.textContent = this.data.description
+			textBlock.appendChild( description )
+
+		}
+
+		if ( this.data.date ) {
+
+			const date = document.createElement( 'p' )
+			date.classList.add( 'date' )
+			date.textContent = `Date: ${ this.data.date }`
+			textBlock.appendChild( date )
+
+		}
+
+		if ( this.data.subjects ) {
+
+			const a = document.createElement( 'a' ),
+				p = document.createElement( 'p' )
+
+			p.classList.add( 'subjects' )
+			p.textContent = 'Subjects: '
+
+			a.textContent = this.data.subjects
+			a.setAttribute( 'href', this.data.subjects )
+
+			p.appendChild( a )
+			textBlock.appendChild( p )
+
+		}
+
+		if ( this.data.spatial ) {
+
+			const a = document.createElement( 'a' ),
+				p = document.createElement( 'p' )
+
+			p.classList.add( 'spatial' )
+			p.textContent = 'Spatial: '
+
+			a.textContent = this.data.spatial
+			a.setAttribute( 'href', this.data.spatial )
+
+			p.appendChild( a )
+			textBlock.appendChild( p )
+
+		}
 
 		return this.element
 

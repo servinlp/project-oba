@@ -7,7 +7,8 @@
   "scripts": {
     "buildWorker": "cpy src/js/worker.js dist/",
     "watchWorker": "onchange src/js/worker.js -- yarn run buildWorker",
-    "start": "parallelshell \"yarn run parcel index.html --no-hmr\" \"yarn run watchWorker\" && yarn run buildWorker"
+    "start": "parallelshell \"yarn run parcel index.html --no-hmr\" \"yarn run watchWorker\" && yarn run buildWorker",
+    "run": "parallelshell \"php -S localhost:4000\" \"sass --watch ./src/css/style.scss:./src/css/style.css\""
   },
   "dependencies": {
     "autoprefixer": "^8.1.0",
